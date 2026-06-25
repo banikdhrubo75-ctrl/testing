@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUXE · cosmetic dropshipping</title>
+  <!-- no external libraries -->
+  <style>
+    /* ----- reset & base ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #faf7f2;
+      color: #1e1e1e;
+      line-height: 1.5;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ----- header / nav ----- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0 2rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      background: linear-gradient(145deg, #2b2b2b, #4a3f3a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo span {
+      font-weight: 300;
+      color: #9b8b82;
+      -webkit-text-fill-color: #9b8b82;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: 450;
+      color: #3e3a36;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: inherit;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 0.25rem;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #b8a79c;
+      color: #1a1410;
+    }
+
+    /* ----- hero / headline ----- */
+    .hero {
+      padding: 3rem 0 2rem 0;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      max-width: 600px;
+      line-height: 1.2;
+    }
+    .hero h1 i {
+      font-style: normal;
+      background: #e5dbd3;
+      padding: 0.1rem 0.6rem;
+      border-radius: 40px;
+      font-weight: 400;
+    }
+    .hero p {
+      color: #5e554d;
+      max-width: 480px;
+      margin-top: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    /* ----- product grid (3D hover) ----- */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2.5rem;
+      margin: 3rem 0 4rem 0;
+    }
+
+    /* 3D card */
+    .product-card {
+      background: #ffffff;
+      border-radius: 36px;
+      padding: 1.8rem 1.2rem 1.8rem 1.2rem;
+      box-shadow: 0 18px 30px -12px rgba(0,0,0,0.08);
+      transition: all 0.25s ease;
+      transform-style: preserve-3d;
+      perspective: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(2px);
+      will-change: transform;
+    }
+
+    /* 3D hover effect (pure CSS) */
+    .product-card:hover {
+      transform: rotateY(6deg) rotateX(4deg) translateY(-8px);
+      box-shadow: 0 30px 45px -18px rgba(60, 45, 35, 0.25);
+      border-color: #d6cbc2;
+      background: #ffffff;
+    }
+
+    .product-card img {
+      width: 100%;
+      max-width: 140px;
+      aspect-ratio: 1/1;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 10px 8px rgba(0,0,0,0.02));
+      transition: 0.2s;
+    }
+    .product-card:hover img {
+      transform: scale(1.02) translateZ(8px);
+    }
+
+    .product-card h3 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      letter-spacing: -0.01em;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .product-card .price {
+      font-weight: 500;
+      font-size: 1.3rem;
+      color: #2f2823;
+      margin: 0.2rem 0 0.5rem;
+    }
+
+    .product-card .stars {
+      color: #d4b8a2;
+      letter-spacing: 3px;
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .add-to-cart-btn {
+      background: #1e1a16;
+      border: none;
+      color: white;
+      font-weight: 500;
+      padding: 0.6rem 1.8rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      width: 100%;
+      max-width: 160px;
+      margin-top: 0.25rem;
+    }
+    .add-to-cart-btn:hover {
+      background: #3d322b;
+      transform: scale(1.02) translateZ(6px);
+      box-shadow: 0 10px 20px -8px rgba(30, 20, 15, 0.2);
+    }
+    .add-to-cart-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* ----- review section ----- */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 450;
+      letter-spacing: -0.02em;
+      margin: 3rem 0 1.8rem 0;
+      border-left: 6px solid #cbb7aa;
+      padding-left: 1.2rem;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .review-item {
+      background: white;
+      padding: 1.5rem 1.5rem 1.2rem;
+      border-radius: 28px;
+      box-shadow: 0 8px 18px -8px rgba(0,0,0,0.04);
+      border: 1px solid #ede8e2;
+      transition: 0.2s;
+    }
+    .review-item:hover {
+      border-color: #d1c2b6;
+      transform: translateY(-3px);
+    }
+    .review-item .stars {
+      color: #d4b8a2;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+    .review-item p {
+      font-size: 0.95rem;
+      color: #2f2a26;
+      margin: 0.5rem 0 0.25rem;
+    }
+    .review-item .author {
+      font-size: 0.8rem;
+      color: #867a72;
+      font-weight: 450;
+    }
+
+    /* ----- delivery & payment options (two columns) ----- */
+    .info-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      background: #f1ede8;
+      border-radius: 40px;
+      padding: 2rem 2.2rem;
+      margin: 2rem 0 3rem 0;
+      border: 1px solid #e3dbd3;
+    }
+
+    .info-block h4 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .info-block ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+    }
+    .info-block ul li {
+      background: white;
+      padding: 0.2rem 1.2rem 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      border: 1px solid #dad0c7;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+    }
+    .payment-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.8rem;
+    }
+    .payment-icons span {
+      background: white;
+      padding: 0.25rem 1.1rem;
+      border-radius: 40px;
+      border: 1px solid #dad0c7;
+      font-weight: 450;
+      font-size: 0.9rem;
+    }
+
+    /* ----- simple buying process (steps) ----- */
+    .buying-process {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem 0.5rem;
+      background: #fcf9f6;
+      padding: 1.8rem 2rem;
+      border-radius: 60px;
+      margin: 2rem 0 2.5rem 0;
+      border: 1px solid #e7dfd8;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 450;
+    }
+    .step .num {
+      background: #1e1a16;
+      color: white;
+      width: 2.2rem;
+      height: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 60px;
+      font-size: 0.9rem;
+    }
+    .step p {
+      color: #2f2a26;
+    }
+
+    /* ----- cart (mini) ----- */
+    .cart-section {
+      background: white;
+      border-radius: 40px;
+      padding: 1.8rem 2rem;
+      margin: 2.5rem 0 2rem 0;
+      box-shadow: 0 10px 30px -18px rgba(0,0,0,0.06);
+      border: 1px solid #e9e0d9;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-info {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .cart-info span {
+      background: #ece6e0;
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      font-weight: 500;
+    }
+    .cart-items-list {
+      display: flex;
+      gap: 0.5rem 1.2rem;
+      flex-wrap: wrap;
+      color: #3c3530;
+    }
+    .cart-items-list .item-badge {
+      background: #f2ede8;
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+    }
+    #clear-cart {
+      background: transparent;
+      border: 1px solid #d0c4ba;
+      padding: 0.4rem 1.4rem;
+      border-radius: 60px;
+      font-weight: 450;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    #clear-cart:hover {
+      background: #e6ddd5;
+      border-color: #b7a89b;
+    }
+
+    .cart-total {
+      font-weight: 500;
+      font-size: 1.2rem;
+      margin-left: 0.5rem;
+    }
+
+    /* responsive */
+    @media (max-width: 640px) {
+      .info-panel { grid-template-columns: 1fr; }
+      .buying-process { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+      .navbar { flex-direction: column; align-items: flex-start; }
+      .hero h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- header -->
+  <nav class="navbar">
+    <div class="logo">LUXE<span> · skin</span></div>
+    <div class="nav-links">
+      <a href="#">New</a>
+      <a href="#">Bestsellers</a>
+      <a href="#">Rituals</a>
+      <a href="#">Journal</a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>Minimal. <i>potent.</i> <br />clean beauty.</h1>
+    <p>Dropshipping curated — serums, creams, and rituals for the modern self.</p>
+  </div>
+
+  <!-- product grid (3D hover) -->
+  <div class="product-grid" id="productGrid">
+    <!-- cards will be injected via JS -->
+  </div>
+
+  <!-- review section -->
+  <div class="section-title">✧ what our community says</div>
+  <div class="review-grid" id="reviewGrid">
+    <!-- reviews injected -->
+  </div>
+
+  <!-- delivery & payment options -->
+  <div class="info-panel">
+    <div class="info-block">
+      <h4>🚚 delivery</h4>
+      <ul>
+        <li>express 1-3 days</li>
+        <li>standard 5-7 days</li>
+        <li>free over $75</li>
+        <li>tracked</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>💳 payment</h4>
+      <div class="payment-icons">
+        <span>Visa</span>
+        <span>Mastercard</span>
+        <span>PayPal</span>
+        <span>Apple Pay</span>
+        <span>Klarna</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- simple buying process -->
+  <div class="buying-process">
+    <div class="step"><span class="num">1</span><p>Choose your ritual</p></div>
+    <div class="step"><span class="num">2</span><p>Add to cart</p></div>
+    <div class="step"><span class="num">3</span><p>Secure checkout</p></div>
+    <div class="step"><span class="num">4</span><p>Delivered · glow</p></div>
+  </div>
+
+  <!-- cart & total -->
+  <div class="cart-section" id="cartSection">
+    <div class="cart-info">
+      <span>🛒 cart</span>
+      <div class="cart-items-list" id="cartItemsList">
+        <span class="item-badge" style="opacity:0.6;">empty</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+      <span class="cart-total" id="cartTotal">$0</span>
+      <button id="clear-cart">clear</button>
+    </div>
+  </div>
+
+  <!-- footer note -->
+  <div style="text-align: center; padding: 1.5rem 0 0.5rem; color: #9a8e85; font-size: 0.8rem; border-top: 1px solid #e9e1da; margin-top: 0.5rem;">
+    © LUXE skin · dropshipping essentials
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ----- data -----
+    const products = [
+      { id: 1, name: 'Glow serum', price: 48, stars: 4.5, img: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Ccircle cx=\'60\' cy=\'60\' r=\'50\' fill=\'%23f3e6dc\' /%3E%3Ccircle cx=\'60\' cy=\'60\' r=\'30\' fill=\'%23e0cfc0\' /%3E%3Ccircle cx=\'60\' cy=\'60\' r=\'12\' fill=\'%23b8a392\' /%3E%3C/svg%3E' },
+      { id: 2, name: 'Barrier cream', price: 62, stars: 5, img: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Crect x=\'15\' y=\'30\' width=\'90\' height=\'60\' rx=\'20\' fill=\'%23d8cdc2\' /%3E%3Crect x=\'35\' y=\'45\' width=\'50\' height=\'30\' rx=\'8\' fill=\'%23b5a494\' /%3E%3C/svg%3E' },
+      { id: 3, name: 'Nectar mist', price: 39, stars: 4, img: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Cellipse cx=\'60\' cy=\'60\' rx=\'35\' ry=\'50\' fill=\'%23e4d6cb\' /%3E%3Ccircle cx=\'60\' cy=\'45\' r=\'12\' fill=\'%23cbb9ab\' /%3E%3C/svg%3E' },
+      { id: 4, name: 'Overnight mask', price: 55, stars: 4.5, img: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Cpath d=\'M30 40 L90 40 L100 80 L20 80 Z\' fill=\'%23ddd2c7\' /%3E%3Ccircle cx=\'60\' cy=\'60\' r=\'18\' fill=\'%23bfaea0\' /%3E%3C/svg%3E' },
+    ];
+
+    const reviews = [
+      { stars: 5, text: 'My skin feels like silk. Absolutely love the serum.', author: 'Elena R.' },
+      { stars: 4, text: 'Gentle and effective. The cream is a staple now.', author: 'Marcus L.' },
+      { stars: 5, text: 'Fast shipping and beautiful packaging. 10/10', author: 'Sophia K.' },
+    ];
+
+    // ----- state -----
+    let cart = [];
+
+    // DOM refs
+    const productGrid = document.getElementById('productGrid');
+    const reviewGrid = document.getElementById('reviewGrid');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartTotal = document.getElementById('cartTotal');
+    const clearBtn = document.getElementById('clear-cart');
+
+    // ----- render products -----
+    function renderProducts() {
+      productGrid.innerHTML = '';
+      products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        // star display
+        const fullStars = Math.floor(p.stars);
+        const starStr = '★'.repeat(fullStars) + (p.stars % 1 === 0.5 ? '½' : '');
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" loading="lazy" />
+          <h3>${p.name}</h3>
+          <div class="price">$${p.price}</div>
+          <div class="stars">${starStr}</div>
+          <button class="add-to-cart-btn" data-id="${p.id}">Add to cart</button>
+        `;
+        productGrid.appendChild(card);
+      });
+
+      // attach add to cart events
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const id = parseInt(this.dataset.id);
+          const product = products.find(p => p.id === id);
+          if (product) {
+            cart.push(product);
+            updateCartUI();
+          }
+        });
+      });
+    }
+
+    // ----- render reviews -----
+    function renderReviews() {
+      reviewGrid.innerHTML = '';
+      reviews.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'review-item';
+        const starStr = '★'.repeat(r.stars);
+        div.innerHTML = `
+          <div class="stars">${starStr}</div>
+          <p>“${r.text}”</p>
+          <div class="author">— ${r.author}</div>
+        `;
+        reviewGrid.appendChild(div);
+      });
+    }
+
+    // ----- update cart UI -----
+    function updateCartUI() {
+      // clear list
+      cartItemsList.innerHTML = '';
+      if (cart.length === 0) {
+        const emptyBadge = document.createElement('span');
+        emptyBadge.className = 'item-badge';
+        emptyBadge.style.opacity = '0.6';
+        emptyBadge.textContent = 'empty';
+        cartItemsList.appendChild(emptyBadge);
+      } else {
+        // show unique items with count
+        const counts = {};
+        cart.forEach(item => { counts[item.id] = (counts[item.id] || 0) + 1; });
+        Object.keys(counts).forEach(id => {
+          const product = products.find(p => p.id === parseInt(id));
+          if (product) {
+            const badge = document.createElement('span');
+            badge.className = 'item-badge';
+            badge.textContent = `${product.name} ×${counts[id]}`;
+            cartItemsList.appendChild(badge);
+          }
+        });
+      }
+
+      // total
+      const total = cart.reduce((sum, p) => sum + p.price, 0);
+      cartTotal.textContent = `$${total}`;
+    }
+
+    // ----- clear cart -----
+    function clearCart() {
+      cart = [];
+      updateCartUI();
+    }
+
+    // ----- init -----
+    function init() {
+      renderProducts();
+      renderReviews();
+      updateCartUI();
+
+      clearBtn.addEventListener('click', clearCart);
+    }
+
+    init();
+  })();
+</script>
+</body>
+</html>
